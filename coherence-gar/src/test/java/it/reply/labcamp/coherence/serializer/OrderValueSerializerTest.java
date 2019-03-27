@@ -20,7 +20,6 @@ public class OrderValueSerializerTest {
 
 	protected OrderValue createOrderValue(){
 		OrderValue order = new OrderValue();
-		order.setCustomer(new CustomerKeySerializerTest().createCustomerKey(200));
 		order.setNote("note");
 		order.setTax(20);
 		order.setOrderKey(new OrderKeySerializerTest().createOrderKey(100));

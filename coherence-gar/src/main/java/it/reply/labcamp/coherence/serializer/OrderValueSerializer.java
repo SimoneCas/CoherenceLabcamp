@@ -15,7 +15,6 @@ public class OrderValueSerializer implements PofSerializer<OrderValue> {
 		ORDER_KEY,
 		TOTAL,
 		NOTE,
-		CUSTOMER,
 		PRODUCTS,
 		TAX
 	}
@@ -26,7 +25,6 @@ public class OrderValueSerializer implements PofSerializer<OrderValue> {
 		orderValue.setOrderKey(in.readObject(Fields.ORDER_KEY.ordinal()));
 		orderValue.setTotal(in.readDouble(Fields.TOTAL.ordinal()));
 		orderValue.setNote(in.readString(Fields.NOTE.ordinal()));
-		orderValue.setCustomer(in.readObject(Fields.CUSTOMER.ordinal()));
 		orderValue.setProducts(in.readCollection(Fields.PRODUCTS.ordinal(), new ArrayList<>()));
 		orderValue.setTax(in.readObject(Fields.TAX.ordinal()));
 		in.readRemainder();
@@ -38,7 +36,6 @@ public class OrderValueSerializer implements PofSerializer<OrderValue> {
 		out.writeObject(Fields.ORDER_KEY.ordinal(), orderValue.getOrderKey());
 		out.writeDouble(Fields.TOTAL.ordinal(), orderValue.getTotal());
 		out.writeString(Fields.NOTE.ordinal(), orderValue.getNote());
-		out.writeObject(Fields.CUSTOMER.ordinal(), orderValue.getCustomer());
 		out.writeCollection(Fields.PRODUCTS.ordinal(), orderValue.getProducts());
 		out.writeObject(Fields.TAX.ordinal(), orderValue.getTax());
 		out.writeRemainder(null);

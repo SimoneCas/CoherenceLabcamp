@@ -143,7 +143,6 @@ public class OrderLibTest {
 
 	private  OrderValue createOrderValue() {
 		OrderValue order = new OrderValue();
-		order.setCustomer(new CustomerKey(200));
 		order.setNote("note");
 		order.setTax(20);
 		order.setOrderKey(new OrderKey(10, new CustomerKey(200)));
@@ -157,7 +156,6 @@ public class OrderLibTest {
 	
 	private  OrderValue createOrderValue2() {
 		OrderValue order = new OrderValue();
-		order.setCustomer(new CustomerKey(200));
 		order.setNote("note 2");
 		order.setTax(14);
 		order.setOrderKey(new OrderKey(11, new CustomerKey(200)));
@@ -171,7 +169,6 @@ public class OrderLibTest {
 	
 	private  OrderValue createOrderValue3() {
 		OrderValue order = new OrderValue();
-		order.setCustomer(new CustomerKey(150));
 		order.setNote("note 3");
 		order.setTax(10);
 		order.setOrderKey(new OrderKey(12, new CustomerKey(150)));

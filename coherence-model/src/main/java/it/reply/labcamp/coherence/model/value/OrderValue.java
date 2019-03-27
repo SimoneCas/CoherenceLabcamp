@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.reply.labcamp.coherence.model.key.CustomerKey;
 import it.reply.labcamp.coherence.model.key.OrderKey;
 import it.reply.labcamp.coherence.model.key.ProductKey;
 
@@ -14,7 +13,6 @@ public class OrderValue implements Serializable{
 	private OrderKey orderKey;
 	private Double total;
 	private String note;
-	private CustomerKey customer;
 	private Integer tax;
 	private List<ProductKey> products = new ArrayList<>();
 	
@@ -36,12 +34,6 @@ public class OrderValue implements Serializable{
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public CustomerKey getCustomer() {
-		return customer;
-	}
-	public void setCustomer(CustomerKey customer) {
-		this.customer = customer;
-	}
 	public List<ProductKey> getProducts() {
 		return products;
 	}
@@ -57,14 +49,12 @@ public class OrderValue implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "OrderValue [orderKey=" + orderKey + ", total=" + total + ", note=" + note + ", customer=" + customer
-				+ ", tax=" + tax + ", products=" + products + "]";
+		return "OrderValue [orderKey=" + orderKey + ", total=" + total + ", note=" + note + ", tax=" + tax + ", products=" + products + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + ((orderKey == null) ? 0 : orderKey.hashCode());
 		result = prime * result + ((products == null) ? 0 : products.hashCode());
@@ -81,11 +71,6 @@ public class OrderValue implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		OrderValue other = (OrderValue) obj;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
 		if (note == null) {
 			if (other.note != null)
 				return false;
