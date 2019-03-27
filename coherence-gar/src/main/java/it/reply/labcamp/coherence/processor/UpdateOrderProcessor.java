@@ -15,6 +15,7 @@ import com.tangosol.util.Converter;
 import com.tangosol.util.InvocableMap.Entry;
 import com.tangosol.util.processor.AbstractProcessor;
 
+import it.reply.labcamp.coherence.model.key.CustomerKey;
 import it.reply.labcamp.coherence.model.key.OrderKey;
 import it.reply.labcamp.coherence.model.key.ProductKey;
 import it.reply.labcamp.coherence.model.value.CustomerValue;
@@ -68,8 +69,8 @@ public class UpdateOrderProcessor  extends AbstractProcessor<OrderKey, OrderValu
 		BackingMapManagerContext context = ((BinaryEntry<OrderKey, OrderValue>)entry).getContext();
 		BackingMapContext customerMapContext = context.getBackingMapContext("CUSTOMERCACHE");
 		logger.info("{} CustomerMapContext: {}","incrementCustomerCounter",customerMapContext);
-		Converter<String,Binary> keyConverter = (Converter<String,Binary>)context.getKeyToInternalConverter();
-		Entry customerMapEntry = customerMapContext.getBackingMapEntry(keyConverter.convert(entry.getKey().getCustomerKey().getCustomerId().toString()));
+		Converter<CustomerKey,Binary> keyConverter = (Converter<CustomerKey,Binary>)context.getKeyToInternalConverter();
+		Entry customerMapEntry = customerMapContext.getBackingMapEntry(keyConverter.convert(entry.getKey().getCustomerKey()));
 		CustomerValue customerValue = (CustomerValue) customerMapEntry.getValue();
 		customerValue.incrementOrderCounter();
 		customerMapEntry.setValue(customerValue);

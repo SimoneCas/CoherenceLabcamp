@@ -123,14 +123,12 @@ public class OrderLibTest {
 		OrderLib orderLib = new OrderLib();
 		OrderValue newOrder = createOrderValue();
 		newOrder.setOrderKey(new OrderKey(80, customerKey));
-		Collection<CustomerValue> values = customerCache.values();
-		Collection<OrderValue> values2 = this.orderCache.values();
 		
 		orderLib.updateOrder(newOrder);
-		
+
 		assertTrue(2 == customerCache.get(customerKey).getOrderCounter());
 		assertTrue(this.orderCache.containsKey(newOrder.getOrderKey()));
-		assertTrue(this.orderCache.containsKey(createOrderValue().getOrderKey()));
+		assertTrue(this.orderCache.containsKey(createOrderValue3().getOrderKey()));
 	}
 	
 	private void initializeOrderCacheWithProcessor() {

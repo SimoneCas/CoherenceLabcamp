@@ -17,7 +17,7 @@ public class KeyCacheAssociatorTest {
 		KeyCacheAssociator keyCacheAssociator = new KeyCacheAssociator();
 		Object associatedCustomerKey = keyCacheAssociator.getAssociatedKey(customer.getCustomerKey());
 		
-		Assert.assertEquals("200", associatedCustomerKey);
+		Assert.assertEquals(200, associatedCustomerKey);
 	}
 	
 	@Test
@@ -27,6 +27,6 @@ public class KeyCacheAssociatorTest {
 		KeyCacheAssociator keyCacheAssociator = new KeyCacheAssociator();
 		Object associatedOrderKey = keyCacheAssociator.getAssociatedKey(order.getOrderKey());
 		
-		Assert.assertEquals("200", associatedOrderKey);
+		Assert.assertEquals(200, associatedOrderKey);
 	}
 }
