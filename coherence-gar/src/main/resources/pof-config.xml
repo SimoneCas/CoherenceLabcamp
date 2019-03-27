@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!-- Note: To add custom types, create a new 'pof-config.xml' file containing 
+	your custom user-type elements, and place it at the beginning of the class 
+	path. -->
+
+<pof-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.oracle.com/coherence/coherence-pof-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-pof-config coherence-pof-config.xsd">
+	<user-type-list>
+		<!-- by default just include coherence POF user types -->
+		<include>coherence-pof-config.xml</include>
+		
+		<!-- Keys serializer  -->
+		<user-type>
+			<type-id>1001</type-id>
+			<class-name>it.reply.labcamp.coherence.model.key.CustomerKey</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.CustomerKeySerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1002</type-id>
+			<class-name>it.reply.labcamp.coherence.model.key.OrderKey</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.OrderKeySerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1003</type-id>
+			<class-name>it.reply.labcamp.coherence.model.key.ProductKey</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.ProductKeySerializer</class-name>
+			</serializer>
+		</user-type>
+		
+		<!-- Values serializer  -->
+		<user-type>
+			<type-id>1004</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.CustomerValue</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.CustomerValueSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1005</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.OrderValue</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.OrderValueSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1006</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.ProductValue</class-name>
+			<serializer>
+				<class-name>it.reply.labcamp.coherence.serializer.ProductValueSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1007</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.GeoZone</class-name>
+			<serializer>
+				<class-name>com.tangosol.io.pof.EnumPofSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1008</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.Category</class-name>
+			<serializer>
+				<class-name>com.tangosol.io.pof.EnumPofSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1009</type-id>
+			<class-name>it.reply.labcamp.coherence.model.value.PriceRange</class-name>
+			<serializer>
+				<class-name>com.tangosol.io.pof.EnumPofSerializer</class-name>
+			</serializer>
+		</user-type>
+		<user-type>
+			<type-id>1010</type-id>
+			<class-name>it.reply.labcamp.coherence.processor.UpdateOrderProcessor</class-name>
+		</user-type>
+	</user-type-list>
+</pof-config>
