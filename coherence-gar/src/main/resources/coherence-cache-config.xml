@@ -4,6 +4,13 @@
 	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
 	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
 
+	<!-- 
+		1. Abilitare Pof serialization
+		2. Definire un Distributed-Schema, referenziato dalle cache, configurando: thread-count-max, thread-count-min, partition-count, backup-count, key-associator ed implementazione <local-schema> della BackingMap
+		3. Definire le tre seguenti cache: CUSTOMERCACHE (CustomerKey, CustomerValue), ORDERCACHE (OrderKey, OrderValue) , PRODUCTCACHE (ProductKey, ProductValue)	
+	 	4. Aggiungere configurazione key-associator (step da eseguire dopo il punto xxx)
+	 -->
+
 	<defaults>
 		<serializer system-property="tangosol.coherence.serializer">pof</serializer>
 		<socket-provider system-property="tangosol.coherence.socketprovider" />

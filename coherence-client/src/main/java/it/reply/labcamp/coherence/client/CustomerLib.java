@@ -64,6 +64,7 @@ public class CustomerLib {
 
 	/*
 	 * Put CustomerValue in cache (put method)
+	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public void put(CustomerValue value) {
 		CacheFactory.getCache(CUSTOMERCACHE).put(value.getCustomerKey(), value);
@@ -71,6 +72,7 @@ public class CustomerLib {
 	
 	/*
 	 * Get customer by customer id (get method)
+	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public CustomerValue getCustomerValue(Integer customerId) {
 		NamedCache<CustomerKey, CustomerValue> customerCache = CacheFactory.getCache(CUSTOMERCACHE);
@@ -81,6 +83,7 @@ public class CustomerLib {
 	
 	/*
 	 * Get all customers 
+	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<CustomerValue> getAllCustomers() {
 		NamedCache<CustomerKey, CustomerValue> customerCache = CacheFactory.getCache(CUSTOMERCACHE);
@@ -90,6 +93,7 @@ public class CustomerLib {
 	
 	/*
 	 * Get all customers by customer id list
+	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<CustomerValue> getCustomersByIds(List<Integer> customerId) {
 		NamedCache<CustomerKey, CustomerValue> customerCache = CacheFactory.getCache(CUSTOMERCACHE);
@@ -100,6 +104,7 @@ public class CustomerLib {
 	
 	/*
 	 * Get all customers by area (Equals filter)
+	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<CustomerValue> getCustomersByArea(GeoZone area) {
 		NamedCache<CustomerKey, CustomerValue> customerCache = CacheFactory.getCache(CUSTOMERCACHE);
