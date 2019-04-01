@@ -103,7 +103,7 @@
 
 	<modules>
 		<module>coherence-model</module>
-		<module>coherence-gar</module>
+		<module>coherence-cache</module>
 		<module>coherence-client</module>
 	</modules>
 </project>

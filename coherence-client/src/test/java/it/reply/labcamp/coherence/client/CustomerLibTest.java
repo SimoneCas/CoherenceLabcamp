@@ -94,34 +94,37 @@ public class CustomerLibTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testAddListener() throws InterruptedException {
 		this.customerCache.put(createCustomerValue().getCustomerKey(), createCustomerValue());
 		
 		CustomerLib customerLib = new CustomerLib();
-		customerLib.addListener();
+		CustomerListener listener = new CustomerListener();
+		customerLib.addListener(listener);
 		
-		assertEquals(0, customerLib.getDeleteEventsCounter());
-		assertEquals(0, customerLib.getInsertEventsCounter());
-		assertEquals(0, customerLib.getUpdateEventsCounter());
-		
-		this.customerCache.put(createCustomerValue2().getCustomerKey(), createCustomerValue2());
-		
-		assertEquals(0, customerLib.getDeleteEventsCounter());
-		assertEquals(1, customerLib.getInsertEventsCounter());
-		assertEquals(0, customerLib.getUpdateEventsCounter());
+		assertEquals(0, listener.getDeleteEventsCounter());
+		assertEquals(0, listener.getInsertEventsCounter());
+		assertEquals(0, listener.getUpdateEventsCounter());
 		
 		this.customerCache.put(createCustomerValue2().getCustomerKey(), createCustomerValue2());
 		
-		assertEquals(0, customerLib.getDeleteEventsCounter());
-		assertEquals(1, customerLib.getInsertEventsCounter());
-		assertEquals(1, customerLib.getUpdateEventsCounter());
+		Thread.sleep(500);
+		assertEquals(0, listener.getDeleteEventsCounter());
+		assertEquals(1, listener.getInsertEventsCounter());
+		assertEquals(0, listener.getUpdateEventsCounter());
+		
+		this.customerCache.put(createCustomerValue2().getCustomerKey(), createCustomerValue2());
+		
+		Thread.sleep(500);
+		assertEquals(0, listener.getDeleteEventsCounter());
+		assertEquals(1, listener.getInsertEventsCounter());
+		assertEquals(1, listener.getUpdateEventsCounter());
 		
 		this.customerCache.remove(createCustomerValue().getCustomerKey());
 		
-		assertEquals(1, customerLib.getDeleteEventsCounter());
-		assertEquals(1, customerLib.getInsertEventsCounter());
-		assertEquals(1, customerLib.getUpdateEventsCounter());
+		Thread.sleep(500);
+		assertEquals(1, listener.getDeleteEventsCounter());
+		assertEquals(1, listener.getInsertEventsCounter());
+		assertEquals(1, listener.getUpdateEventsCounter());
 	}
 	
 	private void initializeCustomerCache() {

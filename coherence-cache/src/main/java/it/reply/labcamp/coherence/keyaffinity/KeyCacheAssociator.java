@@ -6,6 +6,10 @@ import com.tangosol.net.partition.KeyAssociator;
 import it.reply.labcamp.coherence.model.key.CustomerKey;
 import it.reply.labcamp.coherence.model.key.OrderKey;
 
+/*
+ * Implementare l'interfaccia KeyAssociator per configurare la KeyAssociation di Coherence,
+ * al fine di posizionare nella stessa partizione l'entry del Customer e di tutti i suoi Order
+ */
 public class KeyCacheAssociator implements KeyAssociator{
 
 	@Override

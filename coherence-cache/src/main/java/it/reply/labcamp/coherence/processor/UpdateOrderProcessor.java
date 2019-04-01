@@ -21,6 +21,12 @@ import it.reply.labcamp.coherence.model.key.ProductKey;
 import it.reply.labcamp.coherence.model.value.CustomerValue;
 import it.reply.labcamp.coherence.model.value.OrderValue;
 
+/*
+ * Implementare la classe astratta AbstractProcessor implementando la seguente logica:
+ * 1) Eseguire update dell'ordine ricevuto non sovrascrivendo i prodotti ma sommando i nuovi prodotti ai precedenti già preenti.
+ * 2) Dopo aver implementato la KeyAssociation incrementare il customer counter (che conteggia il numero di ordini di cui è l'intestatario), 
+ * solo nel caso in cui sia un primo inserimento dell'ordine.
+ */
 @Portable
 public class UpdateOrderProcessor  extends AbstractProcessor<OrderKey, OrderValue, Object>{
 	private static final Logger logger = LoggerFactory.getLogger(UpdateOrderProcessor.class);

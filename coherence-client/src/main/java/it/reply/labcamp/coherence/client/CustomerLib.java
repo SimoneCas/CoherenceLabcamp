@@ -19,48 +19,6 @@ import it.reply.labcamp.coherence.model.value.GeoZone;
 public class CustomerLib {
 
 	private static final String CUSTOMERCACHE = "CUSTOMERCACHE";
-	
-	private int insertEventsCounter = 0;
-	private int deleteEventsCounter = 0;
-	private int updateEventsCounter = 0;
-	
-	private MapListener<CustomerKey, CustomerValue> customerListener = 
-			new MapListener<CustomerKey, CustomerValue>() {
-
-				@Override
-				public void entryDeleted(MapEvent<CustomerKey, CustomerValue> event) {
-					System.out.println("Received delete event " + event);
-					deleteEventsCounter++;
-				}
-
-				@Override
-				public void entryInserted(MapEvent<CustomerKey, CustomerValue> event) {
-					System.out.println("Received insert event " + event);
-					insertEventsCounter++;
-				}
-
-				@Override
-				public void entryUpdated(MapEvent<CustomerKey, CustomerValue> event) {
-					System.out.println("Received update event " + event);
-					updateEventsCounter++;
-				}
-				
-				@Override
-				public int hashCode() {
-					return this.getClass().hashCode();
-				}
-
-				@Override
-				public boolean equals(Object obj) {
-					if (this == obj)
-						return true;
-					if (obj == null)
-						return false;
-					if (getClass().equals(obj.getClass()))
-						return true;
-					return false;
-				}
-	};
 
 	/*
 	 * Put CustomerValue in cache (put method)
@@ -116,33 +74,9 @@ public class CustomerLib {
 	/*
 	 * Add Listener on Customer cache
 	 */
-	public void addListener() {
+	public void addListener(CustomerListener listener) {
 		NamedCache<CustomerKey, CustomerValue> customerCache = CacheFactory.getCache(CUSTOMERCACHE);
-		customerCache.addMapListener(customerListener);
+		customerCache.addMapListener(listener);
 	}
 
-	public int getInsertEventsCounter() {
-		return insertEventsCounter;
-	}
-
-	public void setInsertEventsCounter(int insertEventsCounter) {
-		this.insertEventsCounter = insertEventsCounter;
-	}
-
-	public int getDeleteEventsCounter() {
-		return deleteEventsCounter;
-	}
-
-	public void setDeleteEventsCounter(int deleteEventsCounter) {
-		this.deleteEventsCounter = deleteEventsCounter;
-	}
-
-	public int getUpdateEventsCounter() {
-		return updateEventsCounter;
-	}
-
-	public void setUpdateEventsCounter(int updateEventsCounter) {
-		this.updateEventsCounter = updateEventsCounter;
-	}
-	
 }
