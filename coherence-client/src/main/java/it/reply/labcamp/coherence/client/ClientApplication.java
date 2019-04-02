@@ -44,9 +44,10 @@ public class ClientApplication {
 	public static void main(String[] args){
 		
 		printIntroduction();
-		printCommands();
+		
 		
 		while(true) {
+			printCommands();
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("\n\n *****************\n *****************");
 			System.out.println("Inserire comando:");
@@ -113,7 +114,7 @@ public class ClientApplication {
 			case GET_PROD_BY_CATEGORY_AND_PRICE_RANGE:
 				invokeGetProdByCategoryAndPriceRange();
 				break;
-			default: System.out.println("ERRORE - Comndo sconosciuto");
+			default: System.out.println("ERRORE - Comando sconosciuto");
 			}
 			
 		}
