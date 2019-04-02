@@ -35,7 +35,11 @@ NumStep. [Nome modulo] - Descrizione attività
 13. [coherence-cache] - Implementare nel package it.reply.labcamp.coherence.keyaffinity la classe KeyCacheAssociator per configurare la KeyAssociation di Coherence
 14. [coherence-cache] - Modificare nel package it.reply.labcamp.coherence.processor la classe UpdateOrderProcessor implementando i punto 2
 
-
+**Esecuzione codice**
+1. Lanciare un server Data Storage: posizionarsi nella cartella coherence-cache\target e lanciare il comando `java -Dcoherence.distributed.localstorage=true -cp  coherence-cache-1.0.0-SNAPSHOT-jar-with-dependencies.jar com.tangosol.net.DefaultCacheServer`
+2. Lanciare nuovamente un secondo server Data Storage
+3. Lanciare l'applicazione Client che si unirà al Cluster coherence: posizionarsi nella cartella coherence-client\target e lanciare il comando `java -Dcoherence.distributed.localstorage=false  -jar coherence-client-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
+4. Seguire le istruzioni da riga di comando per testare l'applicazione
 
 
 
