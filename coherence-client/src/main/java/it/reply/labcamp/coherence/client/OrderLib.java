@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
+import com.tangosol.net.cache.TypeAssertion;
 import com.tangosol.util.ValueExtractor;
 import com.tangosol.util.extractor.ReflectionExtractor;
 import com.tangosol.util.filter.InFilter;
@@ -25,7 +26,7 @@ public class OrderLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public void put(OrderValue value) {
-		CacheFactory.getCache(ORDERCACHE).put(value.getOrderKey(), value);
+		CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class)).put(value.getOrderKey(), value);
 	}
 
 	/*
@@ -33,7 +34,7 @@ public class OrderLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public OrderValue getOrder(Integer orderId, Integer customerId) {
-		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getCache(ORDERCACHE);
+		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class));
 		
 		OrderKey key = new OrderKey(orderId, new CustomerKey(customerId));
 		return orderCache.get(key);
@@ -44,7 +45,7 @@ public class OrderLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<OrderValue> getAllOrders() {
-		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getCache(ORDERCACHE);
+		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class));
 		
 		return orderCache.values();
 	}
@@ -54,7 +55,7 @@ public class OrderLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/java-reference/toc.htm
 	 */
 	public Collection<OrderValue> getOrdersByTax(List<Integer> taxes) {
-		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getCache(ORDERCACHE);
+		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class));
 		
 		Set<Integer> keySet = taxes.stream().collect(Collectors.toSet());
 		ValueExtractor<OrderValue, Integer> extractor = new ReflectionExtractor<>("getTax");
@@ -66,7 +67,7 @@ public class OrderLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/COHDG/processing-data-cache.htm#COHDG5201
 	 */
 	public double calculateTotalAverage(){
-		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getCache(ORDERCACHE);
+		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class));
 		
 		ValueExtractor<OrderValue, Double> totalExtractor = OrderValue::getTotal;
 		double totalAverage = orderCache.stream()
@@ -80,7 +81,7 @@ public class OrderLib {
 	 * Update Order by Entry Processor
 	 */
 	public void updateOrder(OrderValue newValue) {
-		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getCache(ORDERCACHE);
+		NamedCache<OrderKey, OrderValue> orderCache = CacheFactory.getTypedCache(ORDERCACHE,TypeAssertion.withTypes(OrderKey.class, OrderValue.class));
 		
 		orderCache.invoke(newValue.getOrderKey(), new UpdateOrderProcessor(newValue));
 	}

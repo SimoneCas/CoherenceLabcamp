@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
+import com.tangosol.net.cache.TypeAssertion;
 import com.tangosol.util.Filter;
 import com.tangosol.util.ValueExtractor;
 import com.tangosol.util.extractor.ReflectionExtractor;
@@ -28,7 +29,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public void put(ProductValue value) {
-		CacheFactory.getCache(PRODUCTCACHE).put(value.getProductKey(), value);
+		CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class)).put(value.getProductKey(), value);
 	}
 
 	/*
@@ -36,7 +37,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/performing-basic-cache-operations.htm#COHDG5975
 	 */
 	public ProductValue getProductValue(Integer productId) {
-		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getCache(PRODUCTCACHE);
+		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class));
 		
 		ProductKey key = new ProductKey(productId);
 		return productCache.get(key);
@@ -47,7 +48,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<ProductValue> getAllProducts() {
-		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getCache(PRODUCTCACHE);
+		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class));
 		
 		return productCache.values();
 	}
@@ -57,7 +58,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/develop-applications/querying-data-cache.htm#COHDG136
 	 */
 	public Collection<ProductValue> getProductsByIds(List<Integer> productId) {
-		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getCache(PRODUCTCACHE);
+		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class));
 		
 		List<ProductKey> productKeys = productId.stream().map(id -> new ProductKey(id)).collect(Collectors.toList());
 		return productCache.getAll(productKeys).values();
@@ -68,7 +69,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/java-reference/toc.htm
 	 */
 	public Collection<ProductValue> getProductsWithPriceGreaterThan(Double price) {
-		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getCache(PRODUCTCACHE);
+		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class));
 		
 		ValueExtractor<ProductValue, Double> extractor = new ReflectionExtractor<>("getPrice");
 		return productCache.values(new GreaterFilter<ProductValue, Double>(extractor, price));
@@ -80,7 +81,7 @@ public class ProductLib {
 	 * https://docs.oracle.com/middleware/12213/coherence/java-reference/toc.htm
 	 */
 	public Collection<ProductValue> getProductsByCategoryAndPriceRange(Category category, PriceRange priceRange) {
-		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getCache(PRODUCTCACHE);
+		NamedCache<ProductKey, ProductValue> productCache = CacheFactory.getTypedCache(PRODUCTCACHE, TypeAssertion.withTypes(ProductKey.class, ProductValue.class));
 		
 		Filter productFilter = new EqualsFilter(ExtractorRegister.CATEGORY_AND_PRICE_RANGE_EXTRACTOR,
 					Arrays.asList(category, priceRange));
