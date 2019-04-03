@@ -9,6 +9,7 @@ import com.tangosol.io.pof.PofWriter;
 import it.reply.labcamp.coherence.model.value.ProductValue;
 /*
  * https://docs.oracle.com/middleware/12213/coherence/develop-applications/using-portable-object-format.htm#COHDG5182
+ * 21.2.2 Implementing the PofSerializer Interface
  */
 public class ProductValueSerializer implements PofSerializer<ProductValue> {
 
@@ -23,26 +24,11 @@ public class ProductValueSerializer implements PofSerializer<ProductValue> {
 
 	@Override
 	public ProductValue deserialize(PofReader in) throws IOException {
-		ProductValue productValue = new ProductValue();
-		productValue.setProductKey(in.readObject(Fields.PRODUCT_KEY.ordinal()));
-		productValue.setName(in.readString(Fields.NAME.ordinal()));
-		productValue.setDescription(in.readString(Fields.DESCRIPTION.ordinal()));
-		productValue.setPrice(in.readDouble(Fields.PRICE.ordinal()));
-		productValue.setCategory(in.readObject(Fields.CATEGORY.ordinal()));
-		productValue.setPriceRange(in.readObject(Fields.PRICE_RANGE.ordinal()));
-		in.readRemainder();
-		return productValue;
+		return null;
 	}
 
 	@Override
 	public void serialize(PofWriter out, ProductValue productValue) throws IOException {
-		out.writeObject(Fields.PRODUCT_KEY.ordinal(), productValue.getProductKey());
-		out.writeString(Fields.NAME.ordinal(), productValue.getName());
-		out.writeString(Fields.DESCRIPTION.ordinal(), productValue.getDescription());
-		out.writeDouble(Fields.PRICE.ordinal(), productValue.getPrice());
-		out.writeObject(Fields.CATEGORY.ordinal(), productValue.getCategory());
-		out.writeObject(Fields.PRICE_RANGE.ordinal(), productValue.getPriceRange());
-		out.writeRemainder(null);
 	}
 
 	

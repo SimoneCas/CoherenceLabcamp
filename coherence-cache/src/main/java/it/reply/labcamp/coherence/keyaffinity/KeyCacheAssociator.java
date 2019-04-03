@@ -15,12 +15,7 @@ public class KeyCacheAssociator implements KeyAssociator{
 
 	@Override
 	public Object getAssociatedKey(Object key) {
-		if (key instanceof CustomerKey) {
-			return ((CustomerKey) key).getCustomerId();
-		} else if (key instanceof OrderKey) {
-			return ((OrderKey) key).getCustomerKey().getCustomerId();
-		}
-		return key;
+		return null;
 	}
 
 	@Override

@@ -54,31 +54,12 @@ public class UpdateOrderProcessor  extends AbstractProcessor<OrderKey, OrderValu
 		System.out.println("**********************************\n"
 				+ "Received invocation by UpdateOrderProcessor\n"
 				+ "**********************************\n");
-		if (entry.isPresent()) {
-			System.out.println("key " + entry.getKey() + ", is present in cache");
-			List<ProductKey> aggregatedProducts = newOrder.getProducts();
-			aggregatedProducts.addAll(entry.getValue().getProducts());
-			newOrder.setProducts(aggregatedProducts);
-			
-			entry.setValue(newOrder);
-		} else {
-			System.out.println("key " + entry.getKey() + ", is not present in cache");
-			
-			incrementCustomerCounter(entry);
-			
-			entry.setValue(newOrder);
-		}
+		
 		return null;
 	}
 
 	private void incrementCustomerCounter(Entry<OrderKey, OrderValue> entry) {
-		BackingMapManagerContext context = ((BinaryEntry<OrderKey, OrderValue>)entry).getContext();
-		BackingMapContext customerMapContext = context.getBackingMapContext("CUSTOMERCACHE");
-		Converter<CustomerKey,Binary> keyConverter = (Converter<CustomerKey,Binary>)customerMapContext.getManagerContext().getKeyToInternalConverter();
-		Entry<CustomerKey, CustomerValue> customerMapEntry = customerMapContext.getBackingMapEntry(keyConverter.convert(entry.getKey().getCustomerKey()));
-		CustomerValue customerValue = (CustomerValue) customerMapEntry.getValue();
-		customerValue.incrementOrderCounter();
-		customerMapEntry.setValue(customerValue);
+		
 		System.out.println("**********************************\n"
 				+ "Related customer updated\n"
 				+ "**********************************\n");

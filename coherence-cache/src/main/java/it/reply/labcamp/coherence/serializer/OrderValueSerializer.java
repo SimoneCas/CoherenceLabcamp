@@ -10,6 +10,7 @@ import com.tangosol.io.pof.PofWriter;
 import it.reply.labcamp.coherence.model.value.OrderValue;
 /*
  * https://docs.oracle.com/middleware/12213/coherence/develop-applications/using-portable-object-format.htm#COHDG5182
+ * 21.2.2 Implementing the PofSerializer Interface
  */
 public class OrderValueSerializer implements PofSerializer<OrderValue> {
 
@@ -23,24 +24,11 @@ public class OrderValueSerializer implements PofSerializer<OrderValue> {
 
 	@Override
 	public OrderValue deserialize(PofReader in) throws IOException {
-		OrderValue orderValue = new OrderValue();
-		orderValue.setOrderKey(in.readObject(Fields.ORDER_KEY.ordinal()));
-		orderValue.setTotal(in.readDouble(Fields.TOTAL.ordinal()));
-		orderValue.setNote(in.readString(Fields.NOTE.ordinal()));
-		orderValue.setProducts(in.readCollection(Fields.PRODUCTS.ordinal(), new ArrayList<>()));
-		orderValue.setTax(in.readObject(Fields.TAX.ordinal()));
-		in.readRemainder();
-		return orderValue;
+		return null;
 	}
 
 	@Override
 	public void serialize(PofWriter out, OrderValue orderValue) throws IOException {
-		out.writeObject(Fields.ORDER_KEY.ordinal(), orderValue.getOrderKey());
-		out.writeDouble(Fields.TOTAL.ordinal(), orderValue.getTotal());
-		out.writeString(Fields.NOTE.ordinal(), orderValue.getNote());
-		out.writeCollection(Fields.PRODUCTS.ordinal(), orderValue.getProducts());
-		out.writeObject(Fields.TAX.ordinal(), orderValue.getTax());
-		out.writeRemainder(null);
 	}
 
 	

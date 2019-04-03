@@ -9,6 +9,7 @@ import com.tangosol.io.pof.PofWriter;
 import it.reply.labcamp.coherence.model.key.ProductKey;
 /*
  * https://docs.oracle.com/middleware/12213/coherence/develop-applications/using-portable-object-format.htm#COHDG5182
+ * 21.2.2 Implementing the PofSerializer Interface
  */
 public class ProductKeySerializer implements PofSerializer<ProductKey> {
 
@@ -18,16 +19,11 @@ public class ProductKeySerializer implements PofSerializer<ProductKey> {
 
 	@Override
 	public ProductKey deserialize(PofReader in) throws IOException {
-		ProductKey productKey = new ProductKey();
-		productKey.setProductId(in.readObject(Fields.PRODUCT_ID.ordinal()));
-		in.readRemainder();
-		return productKey;
+		return null;
 	}
 
 	@Override
 	public void serialize(PofWriter out, ProductKey productKey) throws IOException {
-		out.writeObject(Fields.PRODUCT_ID.ordinal(), productKey.getProductId());
-		out.writeRemainder(null);
 	}
 	
 }
