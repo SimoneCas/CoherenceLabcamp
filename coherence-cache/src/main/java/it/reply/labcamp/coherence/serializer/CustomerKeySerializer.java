@@ -7,7 +7,9 @@ import com.tangosol.io.pof.PofSerializer;
 import com.tangosol.io.pof.PofWriter;
 
 import it.reply.labcamp.coherence.model.key.CustomerKey;
-
+/*
+ * https://docs.oracle.com/middleware/12213/coherence/develop-applications/using-portable-object-format.htm#COHDG5182
+ */
 public class CustomerKeySerializer implements PofSerializer<CustomerKey> {
 
 	private enum Fields {

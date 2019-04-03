@@ -2,8 +2,6 @@ package it.reply.labcamp.coherence.processor;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.tangosol.io.pof.annotation.Portable;
 import com.tangosol.io.pof.annotation.PortableProperty;
@@ -26,10 +24,10 @@ import it.reply.labcamp.coherence.model.value.OrderValue;
  * 1) Eseguire update dell'ordine ricevuto non sovrascrivendo i prodotti ma sommando i nuovi prodotti ai precedenti già preenti.
  * 2) Dopo aver implementato la KeyAssociation incrementare il customer counter (che conteggia il numero di ordini di cui è l'intestatario), 
  * solo nel caso in cui sia un primo inserimento dell'ordine.
+ * https://docs.oracle.com/middleware/12213/coherence/develop-applications/processing-data-cache.htm#COHDG5201
  */
 @Portable
 public class UpdateOrderProcessor  extends AbstractProcessor<OrderKey, OrderValue, Object>{
-	private static final Logger logger = LoggerFactory.getLogger(UpdateOrderProcessor.class);
 	private static final long serialVersionUID = 1L;
 	
 	private OrderValue newOrder;
@@ -74,8 +72,11 @@ public class UpdateOrderProcessor  extends AbstractProcessor<OrderKey, OrderValu
 	private void incrementCustomerCounter(Entry<OrderKey, OrderValue> entry) {
 		BackingMapManagerContext context = ((BinaryEntry<OrderKey, OrderValue>)entry).getContext();
 		BackingMapContext customerMapContext = context.getBackingMapContext("CUSTOMERCACHE");
-		Converter<CustomerKey,Binary> keyConverter = (Converter<CustomerKey,Binary>)context.getKeyToInternalConverter();
-		Entry customerMapEntry = customerMapContext.getBackingMapEntry(keyConverter.convert(entry.getKey().getCustomerKey()));
+		Converter<CustomerKey,Binary> keyConverter = (Converter<CustomerKey,Binary>)customerMapContext.getManagerContext().getKeyToInternalConverter();
+		System.out.println("**** customerMapContext " + customerMapContext);
+		System.out.println("**** entry key " + entry.getKey());
+		System.out.println("**** keyConverter "+ keyConverter);
+		Entry<CustomerKey, CustomerValue> customerMapEntry = customerMapContext.getBackingMapEntry(keyConverter.convert(entry.getKey().getCustomerKey()));
 		CustomerValue customerValue = (CustomerValue) customerMapEntry.getValue();
 		customerValue.incrementOrderCounter();
 		customerMapEntry.setValue(customerValue);

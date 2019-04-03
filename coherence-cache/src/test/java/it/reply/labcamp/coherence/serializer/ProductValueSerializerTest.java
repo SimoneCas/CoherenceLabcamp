@@ -30,7 +30,7 @@ public class ProductValueSerializerTest {
 	
 	@Test
 	public void testPofProductValueSerialization(){
-		Serializer serializer = new ConfigurablePofContext("pof-config.xml");
+		Serializer serializer = new ConfigurablePofContext("lab-pof-config.xml");
 		ProductValue bToBinary= createProductValue();
 		Binary binaryValue = ExternalizableHelper.toBinary(bToBinary, serializer);
 		ProductValue bFromBinary= (ProductValue) ExternalizableHelper.fromBinary(binaryValue, serializer);

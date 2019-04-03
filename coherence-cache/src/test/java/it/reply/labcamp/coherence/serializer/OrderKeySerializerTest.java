@@ -24,7 +24,7 @@ public class OrderKeySerializerTest {
 	
 	@Test
 	public void testPofCustomerKeySerialization(){
-		Serializer serializer = new ConfigurablePofContext("pof-config.xml");
+		Serializer serializer = new ConfigurablePofContext("lab-pof-config.xml");
 		OrderKey bToBinary= createOrderKey(ID);
 		Binary binaryValue = ExternalizableHelper.toBinary(bToBinary, serializer);
 		OrderKey bFromBinary= (OrderKey) ExternalizableHelper.fromBinary(binaryValue, serializer);

@@ -131,7 +131,8 @@ public class ClientApplication {
 		System.out.print("Inserire valore Range di Prezzo (CHEAP, EXPENSIVE, LOW_COST): ");
 		String priceRange = scanner.next();
 		
-		lib.getProductsByCategoryAndPriceRange(Category.valueOf(category), PriceRange.valueOf(priceRange));
+		Collection<ProductValue> productsByCategoryAndPriceRange = lib.getProductsByCategoryAndPriceRange(Category.valueOf(category), PriceRange.valueOf(priceRange));
+		System.out.println(productsByCategoryAndPriceRange);
 	}
 
 	private static void invokeGetProdWithPriceGreaterThan() {

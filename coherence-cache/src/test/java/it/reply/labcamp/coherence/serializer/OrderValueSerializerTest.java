@@ -39,7 +39,7 @@ public class OrderValueSerializerTest {
 	
 	@Test
 	public void testPofCustomerValueSerialization(){
-		Serializer serializer = new ConfigurablePofContext("pof-config.xml");
+		Serializer serializer = new ConfigurablePofContext("lab-pof-config.xml");
 		OrderValue bToBinary= createOrderValueWithProduct();
 		
 		Binary binaryValue = ExternalizableHelper.toBinary(bToBinary, serializer);
@@ -49,7 +49,7 @@ public class OrderValueSerializerTest {
 	
 	@Test
 	public void testPofCustomerValueSerializationWithoutProducts(){
-		Serializer serializer = new ConfigurablePofContext("pof-config.xml");
+		Serializer serializer = new ConfigurablePofContext("lab-pof-config.xml");
 		OrderValue bToBinary= createOrderValue();
 		Binary binaryValue = ExternalizableHelper.toBinary(bToBinary, serializer);
 		OrderValue bFromBinary= (OrderValue) ExternalizableHelper.fromBinary(binaryValue, serializer);

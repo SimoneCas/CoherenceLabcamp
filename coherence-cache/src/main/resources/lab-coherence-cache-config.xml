@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
 
 	<!-- 
-		1. Abilitare Pof serialization
+		1. Abilitare Pof serialization (Configure the ConfigurablePofContext Class for All Services - https://docs.oracle.com/middleware/12213/coherence/develop-applications/using-portable-object-format.htm#COHDG5182)
 		2. Definire un Distributed-Schema, referenziato dalle cache, configurando: thread-count-max, thread-count-min, partition-count, backup-count, key-associator ed implementazione <local-schema> della BackingMap
 		3. Definire le tre seguenti cache: CUSTOMERCACHE (CustomerKey, CustomerValue), ORDERCACHE (OrderKey, OrderValue) , PRODUCTCACHE (ProductKey, ProductValue)	
 	 	4. Aggiungere configurazione key-associator (step da eseguire dopo il punto xxx)
@@ -15,6 +15,7 @@
 		<serializer system-property="tangosol.coherence.serializer">pof</serializer>
 		<socket-provider system-property="tangosol.coherence.socketprovider" />
 	</defaults>
+
 
 	<caching-scheme-mapping>
 		<!-- CUSTOMERS -->
@@ -44,11 +45,11 @@
 		<distributed-scheme>
 			<scheme-name>coherence-labcamp-scheme</scheme-name>
 			<service-name>LabService</service-name>
-			<serializer>pof</serializer>
+			<!-- <serializer>pof</serializer>
 			<thread-count-max>16</thread-count-max>
 			<thread-count-min>4</thread-count-min>
 			<partition-count>1031</partition-count>
-			<backup-count>2</backup-count>
+			<backup-count>2</backup-count> -->
 			<key-associator>
 				<class-name>it.reply.labcamp.coherence.keyaffinity.KeyCacheAssociator</class-name>
 			</key-associator>

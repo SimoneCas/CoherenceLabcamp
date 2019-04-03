@@ -27,7 +27,7 @@ public class CustomerValueSerializerTest {
 	
 	@Test
 	public void testPofCustomerValueSerialization(){
-		Serializer serializer = new ConfigurablePofContext("pof-config.xml");
+		Serializer serializer = new ConfigurablePofContext("lab-pof-config.xml");
 		CustomerValue bToBinary= createCustomerValue();
 		Binary binaryValue = ExternalizableHelper.toBinary(bToBinary, serializer);
 		CustomerValue bFromBinary= (CustomerValue) ExternalizableHelper.fromBinary(binaryValue, serializer);
