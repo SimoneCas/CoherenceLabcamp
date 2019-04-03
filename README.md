@@ -2,26 +2,27 @@
 
 **Configurazione laboratorio:**
 * Copiare il progetto "coherence" in una cartella di lavoro (es: D:\labcamp\coherence\workspace);
-* Sostiture il file di configurazione utilizzato da maven con quello fornito;
+* Sostiture il file di configurazione utilizzato da maven con quello fornito (settings.xml);
 * Modificare nel file "settings.xml" fornito il puntamento al nuovo repository locale utilizzato per il labcamp (es: D:\labcamp\coherence\repository);
-* Tramite Shell posizionarsi nella cartella di progetto e lanciare il comando `mvn clean install`;
+* Tramite Shell posizionarsi nella cartella di progetto e lanciare il comando `mvn clean install -DskipTests`;
 * Terminata l'esecuzione del comando verificare che il nuovo repository maven si sia popolato con le dipendenze di progetto;
 * Avviare l'IDE Eclipse ed importare il progetto "coherence" condiviso come "Existing Maven Projects".
 
 **API Coherence:**
 https://docs.oracle.com/middleware/12213/coherence/java-reference/toc.htm
 
+Seguendo gli stesps del laboratorio implementare tutti i metodi commentati dei progetti coherence-cache e coherence-client. Ogni metodo da implementare ha uno unit test che lanciato tramite Eclipse certificherà il corretto sviluppo.
+
+Completati tutti gli steps o a fine laboratorio eseguire l'applicazione.
 
 **Steps laboratorio**
 NumStep. [Nome modulo] - Descrizione attività
  
-1. [coherence-cache] - Valorizzare file src/main/resources/coherence-cache-config.xml per configurare i seguenti punti:
-	1. Abilitare Pof serialization
-	2. Definire un Distributed-Schema, referenziato dalle cache, configurando: thread-count-max, thread-count-min, partition-count, backup-count ed implementazione <local-schema> della BackingMap
+1. [coherence-cache] - Completare file src/main/resources/lab-coherence-cache-config.xml per configurare i seguenti punti:
+	1. Definire un Distributed-Schema, referenziato dalle cache, configurando  <local-schema> come implementazione della BackingMap
 	3. Definire le tre seguenti cache: CUSTOMERCACHE (CustomerKey, CustomerValue), ORDERCACHE (OrderKey, OrderValue) , PRODUCTCACHE (ProductKey, ProductValue)
 	4. Aggiungere configurazione key-associator (step da eseguire dopo il punto 13)
-2. [coherence-cache] -  Implementare i metodi dei serializzatori presenti nel package: it.reply.labcamp.coherence.serializer e valorizzare il file src/main/resources/pof-config.xml
-3. [coherence-client] - Copiare i file src/main/resources/pof-config.xml e src/main/resources/coherence-cache-config.xml dal progetto coherence-client alla cartella src/test/resources del progetto coherence-client
+2. [coherence-cache] -  Implementare i metodi dei serializzatori presenti nel package: it.reply.labcamp.coherence.serializer e valorizzare il file src/main/resources/lab-pof-config.xml
 3. [coherence-client] - Implementare nel package it.reply.labcamp.coherence.client i seguenti metodi di put: CustomerLib.put(CustomerValue value); OrderLib.put(OrderValue value); ProductLib.put(ProductValue value);
 4. [coherence-client] - Implementare nel package it.reply.labcamp.coherence.client i metodi di get: CustomerLib.getCustomerValue(Integer customerId); OrderLib.getOrder(Integer orderId, Integer customerId); ProductLib.getProductValue(Integer productId);
 5. [coherence-client] - Implementare nel package it.reply.labcamp.coherence.client i metodi di getAll: CustomerLib.getAllCustomers(); OrderLib.getAllOrders(); ProductLib.getAllProducts();

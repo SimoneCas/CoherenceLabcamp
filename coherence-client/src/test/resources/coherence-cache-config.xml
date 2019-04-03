@@ -4,11 +4,6 @@
 	xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
 	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
 
-	<defaults>
-		<serializer system-property="tangosol.coherence.serializer">pof</serializer>
-		<socket-provider system-property="tangosol.coherence.socketprovider" />
-	</defaults>
-
 	<caching-scheme-mapping>
 		<!-- CUSTOMERS -->
 		<cache-mapping>
@@ -38,10 +33,6 @@
 			<scheme-name>coherence-labcamp-scheme</scheme-name>
 			<service-name>LabService</service-name>
 			<serializer>pof</serializer>
-			<thread-count-max>16</thread-count-max>
-			<thread-count-min>4</thread-count-min>
-			<partition-count>1031</partition-count>
-			<backup-count>2</backup-count>
 			<key-associator>
 				<class-name>it.reply.labcamp.coherence.keyaffinity.KeyCacheAssociator</class-name>
 			</key-associator>
